@@ -24,15 +24,15 @@ const Welcome=()=>{
 
     const {connectWallet,currentAccount,formData,sendTransaction,handleChange}=useContext(TransactionContext); 
 
-    const handleSubmit=(e)=>{
-        const {addressTo,amount,keyword,message}=formData;
-
+    const handleSubmit = (e) => {
+        const { addressTo, amount, keyword, message } = formData;
+    
         e.preventDefault();
-
-        if(!addressTo || !amount || !keyword || !message)return;
-
+        
+        // if (!addressTo || !amount || !keyword || !message) return;
+        console.log('submitting');
         sendTransaction();
-    }
+      };
 
     return (
         <div className="flex w-full justify-center items-center">
@@ -44,7 +44,8 @@ const Welcome=()=>{
                     <p className="text-left mt-5 text-white font-light md:w-9/12 w-11/12 text-base">
                         Explore the crypto world. Buy and sell cryptocurrencies easily on BlockVault.
                     </p>
-                    {!currentAccount && (<button
+                    {!currentAccount && (
+                    <button
                         type="button"
                         onClick={connectWallet}
                         className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"

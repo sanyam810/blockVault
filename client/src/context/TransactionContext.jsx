@@ -1,5 +1,6 @@
-import React,{useEffect,useState} from 'react';
-import {ethers} from 'ethers';
+import React,{useEffect,useState} from "react";
+import {ethers} from "ethers";
+
 
 import {contractABI,contractAddress} from '../utils/constants';
 
@@ -9,19 +10,24 @@ export const TransactionContext=React.createContext();
 const {ethereum}=window;
 
 const getEthereumContract=()=>{
-    const provider=new ethers.providers.Web3Provider(ethereum);
+    console.log("Getting contract");
+    const provider=new ethers.providers.Web3Provider(window.ethereum);
     const signer=provider.getSigner();
     const transactionContract=new ethers.Contract(contractAddress,contractABI,signer);
 
-    return transactionContract;
+    console.log({
+        provider,
+        signer,
+        transactionContract
+    });
 }
 
 export const TransactionProvider=({children})=>{
-    const [currentAccount, setCurrentAccount] = useState("");
-    const [formData,setformData]=useState({addressTo:'',amount:'',keyword:'',message:''});
+    const [currentAccount, setCurrentAccount] = useState('');
+    const [formData,setFormData]=useState({addressTo: '',amount: '',keyword: '',message: ''});
 
     const handleChange=(e,name)=>{
-        setformData((prevState)=>({...prevState,[name]: e.target.value}));
+        setFormData((prevState)=>({...prevState,[name]: e.target.value }));
     }
 
     const checkIfWalletIsConnected=async()=>{
@@ -57,12 +63,14 @@ export const TransactionProvider=({children})=>{
     }
 
     const sendTransaction=async()=>{
+        console.log("Sending transaction");
         try{
-            if(!ethereum)return alert("Please install Metamask");
-            const{addressTo,amount,keyword,message}=formData;
-            const transactionContract=getEthereumContract();
+            if(!ethereum) return alert("Please install Metamask");
+            const { addressTo, amount , keyword, message}= formData;
+            getEthereumContract();
         }catch(error){
             console.log(error);
+            
             throw new Error("No ethereum object.")
         }
     }
@@ -72,7 +80,7 @@ export const TransactionProvider=({children})=>{
     },[]);
 
     return(
-        <TransactionContext.Provider value={{connectWallet, currentAccount,formData,setformData,handleChange,sendTransaction}}>
+        <TransactionContext.Provider value={{connectWallet,currentAccount,formData,setFormData,handleChange,sendTransaction}}>
             {children}
         </TransactionContext.Provider>
     );

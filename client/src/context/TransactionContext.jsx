@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
-import {ethers} from "ethers";
 
+import { Contract } from '@ethersproject/contracts';
+import { Web3Provider } from '@ethersproject/providers';
 
 import {contractABI,contractAddress} from '../utils/constants';
 
@@ -11,9 +12,9 @@ const {ethereum}=window;
 
 const getEthereumContract=()=>{
     console.log("Getting contract");
-    const provider=new ethers.providers.Web3Provider(window.ethereum);
+    const provider=new Web3Provider(window.ethereum);
     const signer=provider.getSigner();
-    const transactionContract=new ethers.Contract(contractAddress,contractABI,signer);
+    const transactionContract=new Contract(contractAddress,contractABI,signer);
 
     console.log({
         provider,
@@ -21,6 +22,7 @@ const getEthereumContract=()=>{
         transactionContract
     });
 }
+
 
 export const TransactionProvider=({children})=>{
     const [currentAccount, setCurrentAccount] = useState('');

@@ -5,11 +5,11 @@ import { Web3Provider } from '@ethersproject/providers';
 
 
 import { ethers } from 'ethers';
-const { utils } = ethers;
 
 import {contractABI,contractAddress} from '../utils/constants';
 
 export const TransactionContext=React.createContext();
+
 
 //destructing ethereum from window
 const {ethereum}=window;
@@ -79,7 +79,8 @@ export const TransactionProvider=({children})=>{
             if(!ethereum) return alert("Please install Metamask");
             const { addressTo, amount , keyword, message}= formData;
             const transactionContract=getEthereumContract();
-            const parsedAmount= utils.parseEther(amount);
+            
+            const parsedAmount=  ethers.utils.parseEther(amount);
 
             await ethereum.request({
                 method:'eth_sendTransaction',
@@ -87,7 +88,7 @@ export const TransactionProvider=({children})=>{
                     from: currentAccount,
                     to: addressTo,
                     gas: '0x5208',
-                    value: amount._hex,
+                    value: parsedAmount._hex,
                 }]
             });
 

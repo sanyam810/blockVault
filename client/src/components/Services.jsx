@@ -14,7 +14,7 @@ const Services=()=>{
                     </h1>
                 </div>
             </div>
-            <div className="">
+            <div className="flex-1 flex flex-col justify-start items-center">
 
             </div>
         </div>

@@ -4,8 +4,11 @@ import { RiHeart2Fill } from 'react-icons/ri';
 
 const ServiceCard=({color,title,icon,subtitle})=>(
     <div className="flex flex-row justify-start items-center white-glassmorphism p-3 m-2 cursor-pointer hover:shadow-xl">
-        <div className={`w-10 h-10`}>
+        <div className={`w-10 h-10 rounded-full flex justify-center items-center ${color}`}>
             {icon}
+        </div>
+        <div className="ml-5 flex flex-col flex-1">
+
         </div>
     </div>
 )
@@ -26,7 +29,7 @@ const Services=()=>{
                 <ServiceCard 
                     color="bg-[#2952E3]"
                     title="Security Guaranteed"
-                    icons={<BsShieldFillCheck fontSize={21} className="text-white"/>}
+                    icon={<BsShieldFillCheck fontSize={21} className="text-white"/>}
                     subtitle="Security is guranteed. We always maintain privacy and maintain quality of our products."
                 />
             </div>

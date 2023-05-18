@@ -34,7 +34,9 @@ const TransactionCard =({addressTo, addressFrom, timestamp, message, keyword,amo
                         </>
                     )}
 
-                    <img 
+                    
+                </div>
+                <img 
                         src={gifUrl || url} 
                         alt="gif" 
                         className="w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover"    
@@ -43,7 +45,6 @@ const TransactionCard =({addressTo, addressFrom, timestamp, message, keyword,amo
                     <div className="bg-black p-3 px-5 w-max rounded-3xl -mt-5 shadow-2xl">
                         <p className="text-[#37c7da] font-bold">{timestamp}</p>
                     </div>
-                </div>
             </div>
         </div>
     )

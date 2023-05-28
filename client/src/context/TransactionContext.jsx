@@ -80,7 +80,8 @@ export const TransactionProvider=({children})=>{
             }
 
             console.log(accounts);
-            }catch(error){
+            }
+            catch(error){
                 console.log("Error");
                 throw new Error("No ethereum object.")
             }

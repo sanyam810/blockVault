@@ -41,6 +41,22 @@ export const TransactionProvider=({children})=>{
         setFormData((prevState)=>({...prevState,[name]: e.target.value }));
     }
 
+    const getAllTransactions=async()=>{
+        try{
+            if(!ethereum)return alert("Please alert Metamask");
+            const transactionContract=getEthereumContract();
+            const availableTransactions=await transactionContract.getAllTransactions();
+            
+
+
+            
+            console.log(availableTransactions)
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
     const checkIfWalletIsConnected=async()=>{
         try{
             if(!ethereum)return alert("Please alert Metamask");
@@ -49,7 +65,7 @@ export const TransactionProvider=({children})=>{
 
             if(accounts.length){
                 setCurrentAccount(accounts[0]);
-                //getAllTransactions();
+                getAllTransactions();
             }
             else{
                 console.log('No accounts found');
@@ -60,10 +76,11 @@ export const TransactionProvider=({children})=>{
                 console.log("Error");
                 throw new Error("No ethereum object.")
             }
-    }
+    } 
 
 
-    const chechIfTransactionsExist=async()=>{
+
+    const checkIfTransactionsExist=async()=>{
         try {
             const transactionContract=getEthereumContract();
             const transactionCount=await transactionContract.getTransactionCount();
@@ -125,7 +142,7 @@ export const TransactionProvider=({children})=>{
 
     useEffect(()=>{
         checkIfWalletIsConnected();
-        chechIfTransactionsExist();
+        checkIfTransactionsExist();
     },[]);
 
     return(
